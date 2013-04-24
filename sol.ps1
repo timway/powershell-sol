@@ -15,9 +15,17 @@ if ($fromfile)
 	if (Test-Path $fromfile)
 	{
 		$targets = Get-Content $fromfile
-		foreach($t in $targets)
-		{
-			Stop-Computer -ComputerName $t -ErrorAction SilentlyContinue -Force
-		}
+	}
+}
+else
+{
+	$targets = ,$hostname
+}
+
+foreach($z in $targets)
+{
+	for ($y = 0; $y -lt $attempts; $y++)
+	{
+		Stop-Computer -ComputerName $z -ErrorAction SilentlyContinue -Force
 	}
 }
